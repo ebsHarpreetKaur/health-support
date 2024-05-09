@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Health Support",
+    "slug": "FE-health-support",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/MediCare-logo-withbg.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/MediCare-logo-withoutbg.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.erharpreetkaur.FEhealthsupport"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "52330af4-9edb-4635-9297-ae40577bea41"
+      }
+    }
+  }
+}
