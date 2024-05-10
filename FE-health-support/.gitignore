@@ -3,11 +3,13 @@
 # dependencies
 node_modules/
 .env
+credentials.json
 
 # Expo
 .expo/
 dist/
 web-build/
+credentials/
 
 # Native
 *.orig.*
