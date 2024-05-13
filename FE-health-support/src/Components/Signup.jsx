@@ -1,101 +1,43 @@
-import { View, Text, Image, Pressable, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { View, Text, Image, Pressable, TextInput, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox"
+import Button from '../Components/Button';
 import COLORS from '../theme/color';
-import Button from './Button';
-// import * as WebBrowser from "expo-web-browser";
-// import * as Google from "expo-auth-session/providers/google";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ANDROID_CLIENT_ID } from '../../config';
 import { useNavigation } from "@react-navigation/native";
 
-
-import {
-    GoogleSignin,
-    GoogleSigninButton,
-    statusCodes,
-} from "@react-native-google-signin/google-signin";
-
-// WebBrowser.maybeCompleteAuthSession();
-const Login = () => {
+const Signup = () => {
     const navigation = useNavigation();
 
     const [isPasswordShown, setIsPasswordShown] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
-    const [error, setError] = useState();
-    const [userInfo, setUserInfo] = useState();
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
-
-
-    const configureGoogleSignIn = () => {
-        GoogleSignin.configure({
-            webClientId:
-                "72307864794-vrqf4k859s84o77u52b06l2btc1ap73o.apps.googleusercontent.com",
-            androidClientId:
-                "72307864794-v5k7ua1dkhnb3f8s1ccnru8b5gfa70ck.apps.googleusercontent.com",
-            iosClientId:
-                "72307864794-1vuq2apibl4tg6on2f2nmoq5vul3ltvq.apps.googleusercontent.com",
-        });
-    };
-
-    useEffect(() => {
-        configureGoogleSignIn();
-    });
-
-    const signIn = async () => {
-        console.log("Pressed sign in");
-
-        try {
-            await GoogleSignin.hasPlayServices();
-            const userInfo = await GoogleSignin.signIn();
-            setUserInfo(userInfo);
-            setError();
-        } catch (e) {
-            setError(e);
-        }
-    };
-
-    const logout = () => {
-        setUserInfo(undefined);
-        GoogleSignin.revokeAccess();
-        GoogleSignin.signOut();
-    };
+    const [CallingNumber, setCallingNumber] = useState("");
+    const [Whatsapp_number, setWhatsapp_number] = useState("");
 
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-
-            <View style={{ flex: 1, marginHorizontal: 22, marginVertical: "20%" }}>
-
-                {/* <View style={{ marginVertical: 22 }}>
-
+            <View style={{ flex: 1, marginHorizontal: 22 }}>
+                <View style={{ marginVertical: 5 }}>
                     <Text style={{
                         fontSize: 22,
                         fontWeight: 'bold',
                         marginVertical: 12,
                         color: COLORS.black
                     }}>
-                        Hi Welcome Back ! 👋
+                        Create Account
                     </Text>
 
-                    <Text style={{
-                        fontSize: 16,
-                        color: COLORS.black
-                    }}>Hello again you have been missed!</Text>
-                </View> */}
+                </View>
 
                 <View style={{ marginBottom: 12 }}>
-                    <Image
-                        source={require('../../assets/MediCare-logo-withoutbg.png')}
-                        style={{ width: 100, height: 100, marginLeft: "35%", marginBottom: "5%" }}
-                    />
                     <Text style={{
                         fontSize: 16,
                         fontWeight: 400,
-                        marginVertical: 8
+                        marginVertical: 3
                     }}>Email address</Text>
 
                     <View style={{
@@ -109,14 +51,15 @@ const Login = () => {
                         paddingLeft: 22
                     }}>
                         <TextInput
-                            onChange={(e) => setEmail(e.target.value)}
                             placeholder='Enter your email address'
                             placeholderTextColor={COLORS.black}
                             keyboardType='email-address'
                             style={{
                                 width: "100%"
                             }}
-
+                            onChange={(e) => {
+                                setEmail(e.target.value)
+                            }}
                         />
                     </View>
                 </View>
@@ -125,7 +68,97 @@ const Login = () => {
                     <Text style={{
                         fontSize: 16,
                         fontWeight: 400,
-                        marginVertical: 8
+                        marginVertical: 3
+                    }}>Mobile Number</Text>
+
+                    <View style={{
+                        width: "100%",
+                        height: 48,
+                        borderColor: COLORS.black,
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        alignItems: "center",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        paddingLeft: 22
+                    }}>
+                        <TextInput
+                            placeholder='+91'
+                            placeholderTextColor={COLORS.black}
+                            keyboardType='numeric'
+                            style={{
+                                width: "12%",
+                                borderRightWidth: 1,
+                                borderLeftColor: COLORS.grey,
+                                height: "100%"
+                            }}
+                            onChange={(e) => {
+                                setCallingNumber(e.target.value)
+                            }}
+                        />
+
+                        <TextInput
+                            placeholder='Enter your phone number'
+                            placeholderTextColor={COLORS.black}
+                            keyboardType='numeric'
+                            style={{
+                                width: "80%"
+                            }}
+                        />
+                    </View>
+                </View>
+
+
+                <View style={{ marginBottom: 12 }}>
+                    <Text style={{
+                        fontSize: 16,
+                        fontWeight: 400,
+                        marginVertical: 3
+                    }}>Whatsapp Number</Text>
+
+                    <View style={{
+                        width: "100%",
+                        height: 48,
+                        borderColor: COLORS.black,
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        alignItems: "center",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        paddingLeft: 22
+                    }}>
+                        <TextInput
+                            placeholder='+91'
+                            placeholderTextColor={COLORS.black}
+                            keyboardType='numeric'
+                            style={{
+                                width: "12%",
+                                borderRightWidth: 1,
+                                borderLeftColor: COLORS.grey,
+                                height: "100%"
+                            }}
+                        />
+
+                        <TextInput
+                            placeholder='Enter your whatsapp number'
+                            placeholderTextColor={COLORS.black}
+                            keyboardType='numeric'
+                            style={{
+                                width: "80%"
+                            }}
+                            onChange={(e) => {
+                                setWhatsapp_number(e.target.value)
+                            }}
+                        />
+                    </View>
+                </View>
+
+
+                <View style={{ marginBottom: 12 }}>
+                    <Text style={{
+                        fontSize: 16,
+                        fontWeight: 400,
+                        marginVertical: 3
                     }}>Password</Text>
 
                     <View style={{
@@ -139,12 +172,14 @@ const Login = () => {
                         paddingLeft: 22
                     }}>
                         <TextInput
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder='Enter your password'
+                            placeholder='Enter password'
                             placeholderTextColor={COLORS.black}
                             secureTextEntry={isPasswordShown}
                             style={{
                                 width: "100%"
+                            }}
+                            onChange={(e) => {
+                                setPassword(e.target.value)
                             }}
                         />
 
@@ -178,19 +213,27 @@ const Login = () => {
                         color={isChecked ? COLORS.primary : undefined}
                     />
 
-                    <Text>Remember Me</Text>
+                    <Text>I agree to the terms and conditions</Text>
                 </View>
 
                 <Button
-                    title="Sign in"
+                    title="Continue"
                     filled
                     style={{
                         marginTop: 18,
                         marginBottom: 4,
                     }}
+                    onPress={() => {
+                        navigation.navigate("ProfileView", {
+                            user_email: Email,
+                            user_calling_num: CallingNumber,
+                            user_password: Password,
+                            user_whatsapp_num: Whatsapp_number
+                        })
+                    }}
                 />
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
                     <View
                         style={{
                             flex: 1,
@@ -199,7 +242,7 @@ const Login = () => {
                             marginHorizontal: 10
                         }}
                     />
-                    <Text style={{ fontSize: 14 }}>Or Sign in with</Text>
+                    <Text style={{ fontSize: 14 }}>Or Sign up with</Text>
                     <View
                         style={{
                             flex: 1,
@@ -214,23 +257,6 @@ const Login = () => {
                     flexDirection: 'row',
                     justifyContent: 'center'
                 }}>
-
-                    {/* <View style={styles.container}>
-                        <Text>{JSON.stringify(error)}</Text>
-                        {userInfo && <Text>{JSON.stringify(userInfo.user)}</Text>}
-                        {userInfo ? (
-                            <Button title="Logout" onPress={logout} />
-                        ) : (
-                            <GoogleSigninButton
-                                size={GoogleSigninButton.Size.Wide}
-                                color={GoogleSigninButton.Color.Dark}
-                                onPress={signIn}
-                            />
-                        )}
-                        <StatusBar style="auto" />
-                    </View> */}
-
-
                     {/* <TouchableOpacity
                         onPress={() => console.log("Pressed")}
                         style={{
@@ -246,9 +272,7 @@ const Login = () => {
                         }}
                     >
                         <Image
-                            // source={require("../assets/facebook.png")}
                             source={require("../../assets/facebook.png")}
-
                             style={{
                                 height: 36,
                                 width: 36,
@@ -261,8 +285,7 @@ const Login = () => {
                     </TouchableOpacity> */}
 
                     <TouchableOpacity
-                        // onPress={() => console.log("Pressed")}
-                        onPress={signIn}
+                        onPress={() => console.log("Pressed")}
                         style={{
                             flex: 1,
                             alignItems: 'center',
@@ -292,18 +315,18 @@ const Login = () => {
                 <View style={{
                     flexDirection: "row",
                     justifyContent: "center",
-                    marginVertical: 22
+                    marginVertical: 12
                 }}>
-                    <Text style={{ fontSize: 16, color: COLORS.black }}>Don't have an account ? </Text>
+                    <Text style={{ fontSize: 16, color: COLORS.black }}>Already have an account</Text>
                     <Pressable
-                        onPress={() => navigation.navigate("Signup")}
+                        onPress={() => navigation.navigate("Login")}
                     >
                         <Text style={{
                             fontSize: 16,
                             color: COLORS.primary,
                             fontWeight: "bold",
                             marginLeft: 6
-                        }}>Register</Text>
+                        }}>Login</Text>
                     </Pressable>
                 </View>
             </View>
@@ -311,15 +334,4 @@ const Login = () => {
     )
 }
 
-export default Login
-
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
+export default Signup

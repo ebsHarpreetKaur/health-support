@@ -17,7 +17,10 @@ import Chat from '../Bottom_Tabs/Chat';
 import Home from '../Bottom_Tabs/Home';
 import Notification from '../Bottom_Tabs/Notification';
 // import { theme_color } from '../../config';
-import Account from './../Bottom_Tabs/Account';
+import Account from '../Bottom_Tabs/Account';
+import Signup from '../Components/Signup';
+import ProfileView from '../Components/ProfileView';
+import COLORS from '../theme/color';
 
 
 const Stack = createNativeStackNavigator()
@@ -254,8 +257,8 @@ export default function AppNavigation() {
                     name="Home"
                     component={HomeScreen}
                     options={{
-                        tabBarLabel: 'Dealers',
-                        tabBarActiveTintColor: "#0066b2",
+                        tabBarLabel: 'Home',
+                        tabBarActiveTintColor: COLORS.primary,
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="home-analytics" color={color} size={size} />
                         ),
@@ -267,7 +270,7 @@ export default function AppNavigation() {
                     component={ChatScreen}
                     options={{
                         tabBarLabel: 'Chat',
-                        tabBarActiveTintColor: "#0066b2",
+                        tabBarActiveTintColor: COLORS.primary,
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="chat" color={color} size={size} />
                         ),
@@ -278,7 +281,7 @@ export default function AppNavigation() {
                     component={NotificationScreen}
                     options={{
                         tabBarLabel: 'Notifications',
-                        tabBarActiveTintColor: "#0066b2",
+                        tabBarActiveTintColor: COLORS.primary,
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="bell" color={color} size={size} />
                         ),
@@ -289,7 +292,7 @@ export default function AppNavigation() {
                     component={AccountScreen}
                     options={{
                         tabBarLabel: 'Account',
-                        tabBarActiveTintColor: "#0066b2",
+                        tabBarActiveTintColor: COLORS.primary,
                         // tabBarInactiveBackgroundColor:"#",
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="account" color={color} size={size} />
@@ -317,6 +320,13 @@ export default function AppNavigation() {
                     {state.userToken === undefined || state.userToken === null ? (
                         <>
                             <Stack.Screen name="Login" component={SignInScreen} />
+                            <Stack.Screen name="Signup" component={Signup} />
+                            <Stack.Screen name="ProfileView" component={ProfileView} />
+                            <Stack.Screen
+                                name=" "
+                                component={Root}
+                            // options={{ headerShown: false }}
+                            />
                         </>
                     ) :
                         <>
@@ -325,7 +335,6 @@ export default function AppNavigation() {
                                 component={Root}
                             // options={{ headerShown: false }}
                             />
-                            {/* <Stack.Screen name="AssignProperty" component={AssignProperty} /> */}
 
                         </>
 

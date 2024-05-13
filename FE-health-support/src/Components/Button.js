@@ -17,15 +17,15 @@ const Button = (props) => {
             }}
             onPress={props.onPress}
         >
-            <Text style={{ fontSize: 18, ... { color: textColor } }}>{props.title}</Text>
+            <Text style={{ fontSize: 15, ... { color: textColor } }}>{props.title}</Text>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     button: {
-        paddingBottom: 16,
-        paddingVertical: 10,
+        paddingBottom: 14,
+        paddingVertical: 9,
         borderColor: COLORS.primary,
         borderWidth: 2,
         borderRadius: 12,
